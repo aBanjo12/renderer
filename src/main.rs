@@ -1,3 +1,5 @@
+mod shapes;
+
 use std::time::Duration;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
@@ -11,6 +13,7 @@ fn render(canvas: &mut WindowCanvas, color: Color) {
 }
 
 fn main() -> Result<(), String> {
+
     let sdl_context = sdl2::init().expect("Failed to init SDL2");
     let video_subsystem = sdl_context.video().expect("Failed to init SDL2");
 
@@ -19,6 +22,7 @@ fn main() -> Result<(), String> {
 
     let mut event_pump = sdl_context.event_pump().expect("Failed to convert window to event pump");
     let mut i = 0;
+
     'running: loop {
         for event in event_pump.poll_iter() {
             match event {
@@ -34,7 +38,7 @@ fn main() -> Result<(), String> {
 
         render(&mut canvas, Color::RGB(i, 64, 255 - i));
 
-        ::std::thread::sleep(Duration::new(0, 1_000_000_000u32 / 60));
+        std::thread::sleep(Duration::new(0, 1_000_000_000u32 / 60));
     }
 
     Ok(())
